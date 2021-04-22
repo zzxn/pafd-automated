@@ -4,6 +4,7 @@ from os import path as os_path, getenv
 from sys import exit as sys_exit
 from getpass import getpass
 import re
+from datetime import datetime, timezone, timedelta
 
 from requests import session
 
@@ -138,7 +139,8 @@ class Zlapp(Fudan):
         print("◉上一次提交地址为:", position['formattedAddress'])
         # print("◉上一次提交GPS为", position["position"])
 
-        today = time.strftime("%Y%m%d", time.localtime())
+        # today = time.strftime("%Y%m%d", time.localtime())
+        today = datetime.now(timezone(timedelta(hours=8))).strftime("%Y%m%d") # we should use UTC+8 timezone
 
         if last_info["d"]["info"]["date"] == today:
             print("\n*******今日已提交*******")
